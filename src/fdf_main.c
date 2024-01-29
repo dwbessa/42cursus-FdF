@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:46:04 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/27 16:24:59 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 10:18:38 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@ void	set_default(t_fdf *data)
 	data->shift_y = HEIGHT / 3;
 }
 
-void	init_image(t_fdf *data)
+void	init_image(t_fdf *data, char *file_name)
 {
+	char	*window_name;
+
+	window_name = ft_strjoin("FdF - ", file_name);
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "FdF");
-	data->img_data =  mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->zoom = 20;
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, window_name);
+	free(window_name);
 }
 
 int	deal_key(int keysym, t_fdf *data)
 {
-	printf("TECLA %d APERTADA\n", keysym);
 	if (keysym == ARROW_LEFT)
 		data->shift_x -= 10;
 	if (keysym == ARROW_RIGHT)
@@ -50,11 +51,10 @@ int	deal_key(int keysym, t_fdf *data)
 	else if (keysym == ESCAPE)
 	{
 		printf("The %d key (ESC) has been pressed\n\n", keysym);
-		ft_free((void **)data->matrix);
+		ft_free(data);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
-		free_map(data);
 		free(data);
 		exit(1);
 	}
@@ -63,10 +63,11 @@ int	deal_key(int keysym, t_fdf *data)
 
 int	close_program(t_fdf *data)
 {
-	ft_free((void **)data->matrix);
+	ft_free(data);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
+	free(data);
 	exit(0);
 }
 
@@ -75,12 +76,11 @@ int	main(int argc, char **argv)
 	char		*file_name;
 	t_fdf		*data;
 
-	if (argc == 2)
+	if (argc == 2 && check_file_name(argv[1]) == 0)
 	{
-		check_file_name(argv[1]);
 		file_name = argv[1];
 		data = malloc(sizeof(t_fdf));
-		init_image(data);
+		init_image(data, file_name);
 		get_map(file_name, data);
 		set_default(data);
 		display_map(data);

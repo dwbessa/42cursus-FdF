@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:47:12 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/27 16:01:37 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/28 18:47:06 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int		count_width(char const *s, char c);
 int		check_file_name(char *file_name);
 int		get_infos(char *file_name, t_fdf *data);
 void	free_map(t_fdf *data);
-void	ft_free(void **mat);
+void	ft_free(t_fdf *data);
 
 #endif

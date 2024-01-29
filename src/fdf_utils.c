@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   fdf_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:47:40 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/27 11:52:59 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 11:08:48 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ void	free_map(t_fdf *data)
 	free(data->img_data);
 }
 
-void	ft_free(void **mat)
+void	ft_free(t_fdf *data)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (mat[i])
-		free(mat[i++]);
-	free(mat);
+	while (i < data->height)
+	{
+		free(data->matrix[i]);
+		i++;
+	}
+	free(data->matrix);
 }
 
 int count_width(char const *s, char c)
