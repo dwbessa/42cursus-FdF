@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:47:40 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 16:21:05 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 18:52:31 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,14 @@ int	count_width(char const *s, char c)
 	return (words);
 }
 
-void	set_default(t_fdf *data)
+static void	set_default(t_fdf *data)
 {
 	data->zoom = 10;
-	data->shift_x = WIDTH / 3;
+	data->shift_x = (WIDTH - data->width) / 2;
 	data->shift_y = HEIGHT / 3;
 	data->shift_z = 1;
+	data->angle_x = 0.5235;
+	data->angle_y = 2.6179;
 }
 
 void	init_image(t_fdf *data, char *file_name)
@@ -66,7 +68,7 @@ void	init_image(t_fdf *data, char *file_name)
 	window_name = ft_strjoin("FdF - ", file_name);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, window_name);
-	set_default(data);
 	get_map(file_name, data);
+	set_default(data);
 	free(window_name);
 }

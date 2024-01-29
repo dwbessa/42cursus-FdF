@@ -6,21 +6,21 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:46:58 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 18:06:58 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 18:57:26 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	isometric(float *x, float *y, int z)
+void	isometric(float *x, float *y, int z, t_fdf *data)
 {
 	float	initial_x;
 	float	initial_y;
 
 	initial_x = *x;
 	initial_y = *y;
-	*x = (initial_x - initial_y) * cos(0.5235);
-	*y = (initial_x + initial_y) * sin(2.6179) - z;
+	*x = (initial_x - initial_y) * cos(data->angle_x);
+	*y = (initial_x + initial_y) * sin(data->angle_y) - z;
 }
 
 static int	find_big(t_fdf *data)
@@ -73,10 +73,6 @@ void	bresenham(t_point pos, float x1, float y1, t_fdf *data)
 	data->z = data->matrix[(int)pos.y][(int)pos.x];
 	data->z1 = data->matrix[(int)y1][(int)x1];
 	control(&pos, &x1, &y1, data);
-	pos.x += data->shift_x;
-	pos.y += data->shift_y;
-	x1 += data->shift_x;
-	y1 += data->shift_y;
 	x_step = x1 - pos.x;
 	y_step = y1 - pos.y;
 	max = fmax(fabs(x_step), fabs(y_step));

@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:22:58 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 16:21:00 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 18:52:36 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ int	deal_key(int keysym, t_fdf *data)
 		data->zoom -= 10;
 	if (keysym == KEY_Z)
 		data->shift_z *= 1.5;
+	if (keysym == KEY_W)
+		data->angle_y += 0.05;
+	if (keysym == KEY_S)
+		data->angle_y -= 0.05;
+	if (keysym == KEY_D)
+		data->angle_x += 0.05;
+	if (keysym == KEY_A)
+		data->angle_x -= 0.05;
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	display_map(data);
 	if (keysym != ESCAPE)
