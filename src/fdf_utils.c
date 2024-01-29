@@ -6,11 +6,11 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:47:40 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 11:08:48 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 16:21:05 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 void	free_map(t_fdf *data)
 {
@@ -32,7 +32,7 @@ void	ft_free(t_fdf *data)
 	free(data->matrix);
 }
 
-int count_width(char const *s, char c)
+int	count_width(char const *s, char c)
 {
 	int	words;
 
@@ -49,4 +49,24 @@ int count_width(char const *s, char c)
 			s++;
 	}
 	return (words);
+}
+
+void	set_default(t_fdf *data)
+{
+	data->zoom = 10;
+	data->shift_x = WIDTH / 3;
+	data->shift_y = HEIGHT / 3;
+	data->shift_z = 1;
+}
+
+void	init_image(t_fdf *data, char *file_name)
+{
+	char	*window_name;
+
+	window_name = ft_strjoin("FdF - ", file_name);
+	data->mlx_ptr = mlx_init();
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, window_name);
+	set_default(data);
+	get_map(file_name, data);
+	free(window_name);
 }

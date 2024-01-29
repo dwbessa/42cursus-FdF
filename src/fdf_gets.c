@@ -6,24 +6,16 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:46:51 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 11:00:31 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 13:23:36 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
 
 static char	*count_height(int fd, int *height)
 {
 	*height = *height + 1;
-	return(get_next_line(fd));
-}
-
-static int	get_width(char *line)
-{
-	int	width;
-
-	width = count_width(line, ' ');
-	return (width);
+	return (get_next_line(fd));
 }
 
 int	get_infos(char *file_name, t_fdf *data)
@@ -37,9 +29,9 @@ int	get_infos(char *file_name, t_fdf *data)
 	line = get_next_line(fd);
 	if (!line)
 		return (-1);
-	data->width = get_width(line);
+	data->width = count_width(line, ' ');
 	height = 1;
-	while(line)
+	while (line)
 	{
 		tmp = line;
 		line = count_height(fd, &height);
@@ -54,7 +46,7 @@ int	get_infos(char *file_name, t_fdf *data)
 
 void	malloc_map(t_fdf *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->matrix = malloc(sizeof(int *) * (data->height));
@@ -69,7 +61,7 @@ void	fill_map(int *line_matrix, char	*line)
 
 	i = 0;
 	values = ft_split(line, ' ');
-	while(values[i] != NULL)
+	while (values[i] != NULL)
 	{
 		line_matrix[i] = ft_atoi(values[i]);
 		free(values[i++]);
@@ -89,7 +81,7 @@ void	get_map(char *file_name, t_fdf *data)
 	malloc_map(data);
 	fd = open(file_name, O_RDONLY);
 	line = get_next_line(fd);
-	while(line && i < data->height)
+	while (line && i < data->height)
 	{
 		tmp = line;
 		fill_map(data->matrix[i++], tmp);

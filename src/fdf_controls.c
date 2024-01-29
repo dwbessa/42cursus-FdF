@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_display.c                                      :+:      :+:    :+:   */
+/*   fdf_controls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 10:47:33 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 17:30:39 by dbessa           ###   ########.fr       */
+/*   Created: 2024/01/29 18:03:32 by dbessa            #+#    #+#             */
+/*   Updated: 2024/01/29 18:08:44 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	display_map(t_fdf *data)
+void	adjust_zoom(t_point *pos, float *x1, float *y1, t_fdf *data)
 {
-	t_point	pos;
+	*x1 *= data->zoom;
+	*y1 *= data->zoom;
+	pos->x *= data->zoom;
+	pos->y *= data->zoom;
+}
 
-	pos.y = 0;
-	while (pos.y < data->height)
-	{
-		pos.x = 0;
-		while (pos.x < data->width)
-		{
-			if (!(pos.x == data->width - 1))
-				bresenham(pos, pos.x + 1, pos.y, data);
-			if (!(pos.y == data->height - 1))
-				bresenham(pos, pos.x, pos.y + 1, data);
-			pos.x++;
-		}
-		pos.y++;
-	}
+void	control(t_point *pos, float	*x1, float *y1, t_fdf *data)
+{
+	adjust_zoom(pos, x1, y1, data);
+	isometric(&pos->x, &pos->y, data->z);
+	isometric(x1, y1, data->z1);
+	data->color = put_color(data->z, data);
 }

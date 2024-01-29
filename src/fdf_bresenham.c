@@ -6,27 +6,24 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:46:58 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/27 15:37:13 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 18:06:58 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-
-static void	adjust_zoom(float *x, float *y, float *x1, float *y1, t_fdf *data)
-{
-	*x1 *= data->zoom; // coloquei o zoom na struct 
-	*y1 *= data->zoom; // pra ficar mais facil 
-	*x *= data->zoom; // de alterar
-	*y *= data->zoom; //
-}
+#include "fdf.h"
 
 void	isometric(float *x, float *y, int z)
 {
-	*x = (*x - *y) * cos(0.8);
-	*y = (*x + *y) * sin(0.8) - z;
+	float	initial_x;
+	float	initial_y;
+
+	initial_x = *x;
+	initial_y = *y;
+	*x = (initial_x - initial_y) * cos(0.5235);
+	*y = (initial_x + initial_y) * sin(2.6179) - z;
 }
 
-int	find_big(t_fdf *data)
+static int	find_big(t_fdf *data)
 {
 	int	x;
 	int	y;
@@ -67,33 +64,28 @@ int	put_color(int z, t_fdf *data)
 		return (0xffa500);
 }
 
-void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
+void	bresenham(t_point pos, float x1, float y1, t_fdf *data)
 {
 	float	x_step;
 	float	y_step;
-	int	max;
-	int	z;
-	int	z1;
+	int		max;
 
-	z = data->matrix[(int)y][(int)x];
-	z1 = data->matrix[(int)y1][(int)x1];
-	adjust_zoom(&x, &y, &x1, &y1, data);
-	data->color = put_color(z, data);
-	isometric(&x, &y, z);
-	isometric(&x1, &y1, z1);
-	x += data->shift_x;
-	y += data->shift_y;
+	data->z = data->matrix[(int)pos.y][(int)pos.x];
+	data->z1 = data->matrix[(int)y1][(int)x1];
+	control(&pos, &x1, &y1, data);
+	pos.x += data->shift_x;
+	pos.y += data->shift_y;
 	x1 += data->shift_x;
 	y1 += data->shift_y;
-	x_step = x1 - x;
-	y_step = y1 - y;
+	x_step = x1 - pos.x;
+	y_step = y1 - pos.y;
 	max = fmax(fabs(x_step), fabs(y_step));
 	y_step /= max;
 	x_step /= max;
-	while ((int)(x - x1) || (int)(y - y1))
+	while ((int)(pos.x - x1) || (int)(pos.y - y1))
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
-		x += x_step;
-		y += y_step;
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, pos.x, pos.y, data->color);
+		pos.x += x_step;
+		pos.y += y_step;
 	}
 }

@@ -1,4 +1,4 @@
-NAME		= FdF
+NAME		= fdf
 LIBFT		= libft/libft.a
 MINILIBX	= minilibx/libmlx.a
 SRC 		= $(wildcard src/*.c)
