@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:47:12 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 18:55:47 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 19:16:51 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_I 105
+# define KEY_P 112
 # define KEY_Z 122
+# define KEY_F 102
 # define MOUSE_CLICK_LEFT 1
 # define MOUSE_CLICK_RIGHT 2
 # define MOUSE_CLICK_MIDDLE 3
@@ -86,5 +89,6 @@ void	control(t_point *pos, float	*x1, float *y1, t_fdf *data);
 void	adjust_zoom(t_point *pos, float *x1, float *y1, t_fdf *data);
 void	isometric(float *x, float *y, int z, t_fdf *data);
 int		put_color(int z, t_fdf *data);
+void	set_default(t_fdf *data);
 
 #endif

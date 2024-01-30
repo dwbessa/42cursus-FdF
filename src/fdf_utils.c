@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:47:40 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 18:52:31 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 19:05:04 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	count_width(char const *s, char c)
 	return (words);
 }
 
-static void	set_default(t_fdf *data)
+void	set_default(t_fdf *data)
 {
 	data->zoom = 10;
 	data->shift_x = (WIDTH - data->width) / 2;

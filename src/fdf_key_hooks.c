@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:22:58 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 18:52:36 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/29 19:19:38 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,30 @@ int	deal_key(int keysym, t_fdf *data)
 	if (keysym == MINUS || keysym == MINUS_2)
 		data->zoom -= 10;
 	if (keysym == KEY_Z)
-		data->shift_z *= 1.5;
+		set_default(data);
 	if (keysym == KEY_W)
-		data->angle_y += 0.05;
+		data->angle_y += 0.2;
 	if (keysym == KEY_S)
-		data->angle_y -= 0.05;
+		data->angle_y -= 0.2;
 	if (keysym == KEY_D)
-		data->angle_x += 0.05;
+		data->angle_x += 0.2;
 	if (keysym == KEY_A)
-		data->angle_x -= 0.05;
+		data->angle_x -= 0.2;
+	if (keysym == KEY_F)
+	{
+		data->angle_x -= 3.1415;
+		data->angle_y -= 3.1415;
+	}
+	if (keysym == KEY_P)
+	{
+		data->angle_x = 0.8;
+		data->angle_y = 0.8;
+	}
+	if (keysym == KEY_I)
+	{
+		data->angle_x = 0.5235;
+		data->angle_y = 2.6179;
+	}
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	display_map(data);
 	if (keysym != ESCAPE)
