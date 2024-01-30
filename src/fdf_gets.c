@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:46:51 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 13:23:36 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/30 18:14:43 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ void	get_map(char *file_name, t_fdf *data)
 	get_infos(file_name, data);
 	malloc_map(data);
 	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("Arquivo <%s> não existe.", file_name);
+		exit(EXIT_FAILURE);
+	}
 	line = get_next_line(fd);
 	while (line && i < data->height)
 	{

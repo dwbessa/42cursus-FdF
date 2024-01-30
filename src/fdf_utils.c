@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:47:40 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 19:05:04 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/30 12:09:19 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	set_default(t_fdf *data)
 {
 	data->zoom = 10;
 	data->shift_x = (WIDTH - data->width) / 2;
-	data->shift_y = HEIGHT / 3;
-	data->shift_z = 1;
+	data->shift_y = HEIGHT / 5;
+	data->shift_z = 1.5;
 	data->angle_x = 0.5235;
 	data->angle_y = 2.6179;
 }

@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:47:12 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 19:16:51 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/30 18:11:58 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "../libft/includes/libft.h"
 # include "../minilibx/mlx.h"
 # include <X11/keysym.h>
-# include <stdio.h>
 
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -40,6 +39,8 @@
 # define KEY_P 112
 # define KEY_Z 122
 # define KEY_F 102
+# define KEY_M 109
+# define KEY_N 110
 # define MOUSE_CLICK_LEFT 1
 # define MOUSE_CLICK_RIGHT 2
 # define MOUSE_CLICK_MIDDLE 3

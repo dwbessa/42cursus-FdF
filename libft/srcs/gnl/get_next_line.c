@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 09:46:28 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/27 17:59:34 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/30 10:09:48 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*get_line(int fd, char *buf, char *backup)
 		backup = ft_strjoin(s_temp, buf);
 		free(s_temp);
 		s_temp = NULL;
-		if (ft_check (buf, '\n'))
+		if (ft_check(buf, '\n'))
 			break ;
 	}
 	return (backup);

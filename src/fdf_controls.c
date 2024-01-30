@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:03:32 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 18:54:23 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/30 12:07:23 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	adjust_zoom(t_point *pos, float *x1, float *y1, t_fdf *data)
 	*y1 *= data->zoom;
 	pos->x *= data->zoom;
 	pos->y *= data->zoom;
+	data->z *= (data->zoom / 4);
+	data->z1 *= (data->zoom / 4);
 }
 
 void	control(t_point *pos, float	*x1, float *y1, t_fdf *data)

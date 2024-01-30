@@ -6,7 +6,7 @@
 /*   By: dbessa <dbessa@student.42.rio>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 10:46:58 by dbessa            #+#    #+#             */
-/*   Updated: 2024/01/29 18:57:26 by dbessa           ###   ########.fr       */
+/*   Updated: 2024/01/30 12:30:01 by dbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ int	put_color(int z, t_fdf *data)
 	if (z == 0)
 		return (0xffffff);
 	if (z > 0 && z <= (big_z / 4))
-		return (0xe80c0c);
+		return (0x0989eb);
 	if (z > (big_z / 4) && z <= (big_z / 2))
-		return (255);
+		return (0x382beb);
 	if (z > (big_z / 2) && z <= (3 * big_z / 4))
-		return (0x008000);
+		return (0x0942eb);
 	if (z > (3 * big_z / 4) && z <= big_z)
-		return (0xffff00);
+		return (0x09d0eb);
 	else
-		return (0xffa500);
+		return (0x9863eb);
 }
 
 void	bresenham(t_point pos, float x1, float y1, t_fdf *data)
